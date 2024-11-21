@@ -1,0 +1,17 @@
+name: CI
+on: [push]
+
+
+jobs:
+  vars_test:
+    name: Vars Test
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ci-lint-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Echo
+        run: |
+            echo "Ref Name:" ${{ github.ref_name }}
+            echo "Ref:" ${{ github.ref }}
